@@ -1,24 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import Quote from './QuoteBox/Quote';
+import Error from './common/Error';
+import { useStateContext } from '../providers/StateProvider';
+import Loader from './common/Loader';
 
 const QouteBox = React.memo(() => {
-    const [data, setData] = useState({
-        quote: "",
-        author: ""
-    })
-    const [error, setError] = useState(null);
-    const getQuote = useCallback(async () => {
-        try {
-            const res = await fetch('https://api.api-ninjas.com/v1/quotes?category=life', {
-                headers: {
-                    'X-Api-Key': process.env.REACT_APP_API_KEY
-                }
-            })
-            const {quote, author} = (await res.json())[0];
-            setData({quote: quote, author: author});
-        } catch (error) {
-            setError(error.message);
-        }
-    }, [])
+    const {data, error, isLoading, getQuote, saveQuote} = useStateContext();
     useEffect(() => {
       getQuote();
     }, [getQuote])
@@ -26,18 +13,16 @@ const QouteBox = React.memo(() => {
     return(
         <div className="wrapper">
             <div className="quote-wrapper">
-            {data.quote ?
-                (
-                    <>
-                        <div className="quote">{data.quote}</div>
-                        <div className="author">{data.author}</div>
-                    </>
-                ) : error ? <>{error}</> : <></>
+            {isLoading ? 
+                <Loader /> : 
+            data.quote ?
+                <Quote quote={data.quote} author={data.author} /> : 
+                <Error error={error}/>
             }
             </div>
             <div className="btns">
-                <button className="save">Save</button>
-                <button className="submit">Submit</button>
+                <button className="save" onClick={() => saveQuote(data)} disabled={isLoading}>Save</button>
+                <button className="submit" onClick={getQuote} disabled={isLoading}>Next</button>
             </div>
         </div>
     )

@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import StateProvider from './providers/StateProvider';
+import { RouterProvider } from 'react-router-dom';
+import { routes } from './router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <StateProvider>
+      <RouterProvider  router={routes} />
+    </StateProvider>
   </React.StrictMode>
 );
 
