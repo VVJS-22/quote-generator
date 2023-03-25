@@ -3,7 +3,7 @@ import Main from "./components/Main";
 
 export const routes = createBrowserRouter([{
     path: '/',
-    element: <Outlet />,
+    element: <><h1 style={{textAlign: 'center'}}>Quotes - Login 360</h1><Outlet /></>,
     children: [
         {
             path: '/',
