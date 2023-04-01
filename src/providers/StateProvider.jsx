@@ -14,13 +14,14 @@ const StateProvider = ({children}) => {
     const getQuote = useCallback(async () => {
         try {
             setIsLoading(true);
-            const res = await fetch('https://dummyjson.com/quotes/random');
-            const {quote, author, id} = (await res.json());
+            const res = await fetch('https://api.quotable.io/random');
+            const {content: quote, author, _id: id} = (await res.json());
             setData({quote: quote, author: author, id: id});
             setError(null);
             setIsLoading(false);
         } catch (error) {
-            setError(error.message);
+            setError(
+                error.message);
             setData({quote: '', author: '', id: ""})
             setIsLoading(false);
         }

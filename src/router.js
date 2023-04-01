@@ -1,9 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Main from "./components/Main";
 import SingleQuote from "./components/SingleQuote";
 import Layout from "./Layout";
+import App from "./components/App";
+import UserGreeting from "./components/UserGreeting";
 
-export const routes = createBrowserRouter([{
+export const routes = createHashRouter([{
     path: '/',
     element: <Layout />,
     children: [
@@ -18,6 +20,14 @@ export const routes = createBrowserRouter([{
         {
             path: 'saved-quotes/:id',
             element: <SingleQuote />
+        },
+        {
+            path: '/users',
+            element: <App />
+        },
+        {
+            path: '/users/:name',
+            element: <UserGreeting />
         }
     ]
 }])

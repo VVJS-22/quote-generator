@@ -66,3 +66,9 @@
   from {transform: rotateZ(0deg);}
   to {transform: rotateZ(360deg);}
 }
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
