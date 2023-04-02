@@ -4,6 +4,7 @@ import SingleQuote from "./components/SingleQuote";
 import Layout from "./Layout";
 import App from "./components/App";
 import UserGreeting from "./components/UserGreeting";
+import SavedQuotes from "./components/SavedQuotes";
 
 export const routes = createHashRouter([{
     path: '/',
@@ -15,7 +16,7 @@ export const routes = createHashRouter([{
         },
         {
             path: 'saved-quotes',
-            element: <h1>Saved Quotes</h1>
+            element: <SavedQuotes />
         },
         {
             path: 'saved-quotes/:id',

@@ -3,6 +3,7 @@ import Quote from './QuoteBox/Quote';
 import Error from './common/Error';
 import { useStateContext } from '../providers/StateProvider';
 import Loader from './common/Loader';
+import { Link } from 'react-router-dom';
 
 const QouteBox = React.memo(() => {
     const {data, error, isLoading, getQuote, saveQuote} = useStateContext();
@@ -11,11 +12,13 @@ const QouteBox = React.memo(() => {
     }, [getQuote])
     
     return(
+        <>
+        <Link to="/saved-quotes">Saved Quotes</Link>
         <div className="wrapper">
             <div className="quote-wrapper">
             {isLoading ? 
                 <Loader /> : 
-            data.quote ?
+            data.quote ? 
                 <Quote quote={data.quote} author={data.author} /> : 
                 <Error error={error}/>
             }
@@ -25,6 +28,7 @@ const QouteBox = React.memo(() => {
                 <button className="submit" onClick={getQuote} disabled={isLoading}>Next</button>
             </div>
         </div>
+        </>
     )
 })
 
